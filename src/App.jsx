@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import GamePage from './pages/GamePage';
 
 function App() {
-  const[userName,setUserName] = useState('');
+  const[user,setUser] = useState({name:'',level: "Easy"});
   const[isLoggedIn,setIsLoggedIn] = useState(false);
 
   const handleThemeChange = (e) => {
@@ -30,6 +30,14 @@ function App() {
   const changeLoginState = () => {
     setIsLoggedIn(true);
   }
+
+  const changeUser = (newUser) => {
+    setUser(newUser);
+    console.log(newUser);
+  }
+
+
+  
   return (
     <div className="app">
      <select
@@ -53,6 +61,7 @@ function App() {
         isLoggedIn ? <GamePage /> : 
         (
           <HomePage 
+              changeUser={changeUser}
               changeLoginState = {changeLoginState} 
               handleThemeChange={handleThemeChange}
             />
