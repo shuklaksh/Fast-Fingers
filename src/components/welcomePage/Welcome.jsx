@@ -3,17 +3,17 @@ import keyboard from '../../assets/images/keyBoard.svg';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import './Welcome.css'
 
-function Welcome() {
+function Welcome({onSubmit}) {
 
   const[name,setName] = useState("");
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(name);
+    onSubmit();
   }
 
   return (
-    <div className='welcome-user'>
+    <div className='welcome-user-page'>
       <div className="header">
         <div className="main-image">          
           <img src={keyboard} />
