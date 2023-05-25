@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import GamePage from './pages/GamePage';
 
 function App() {
-  const[user,setUser] = useState('');
+  const[userName,setUserName] = useState('');
   const[isLoggedIn,setIsLoggedIn] = useState(false);
 
   const handleThemeChange = (e) => {
@@ -26,6 +26,10 @@ function App() {
         root.style.setProperty("--input-type1", "#2f3e46");
     }
   };
+
+  const changeLoginState = () => {
+    setIsLoggedIn(true);
+  }
   return (
     <div className="app">
      <select
@@ -49,7 +53,7 @@ function App() {
         isLoggedIn ? <GamePage /> : 
         (
           <HomePage 
-              onSubmit = {() => {setIsLoggedIn(true)}} 
+              changeLoginState = {changeLoginState} 
               handleThemeChange={handleThemeChange}
             />
         )

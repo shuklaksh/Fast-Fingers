@@ -1,10 +1,10 @@
 import Welcome from "../components/welcomePage/Welcome"
 
-function HomePage({onSubmit}) {
+function HomePage({changeLoginState}) {
   return (
     <div className="home-page-container">
       <Welcome 
-        onSubmit={onSubmit}
+        changeLoginState={changeLoginState}
       />
     </div>
   )

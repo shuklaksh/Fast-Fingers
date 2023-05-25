@@ -1,15 +1,25 @@
 import React, { useState } from 'react'
 import keyboard from '../../assets/images/keyBoard.svg';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import useSound from 'use-sound';
+import errorSound from '../../assets/audio/errorSound.wav';
 import './Welcome.css'
 
-function Welcome({onSubmit}) {
-
+function Welcome({changeLoginState}) {
   const[name,setName] = useState("");
+  const[error] = useSound(errorSound);
+  const[isError,setIsError] = useState(false)
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    onSubmit();
+    if(name ==='') {
+      error();
+      setIsError(true);
+    } else {
+      setIsError(false);
+      changeLoginState();
+    }
+   
   }
 
   return (
@@ -33,12 +43,14 @@ function Welcome({onSubmit}) {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
+        {isError ? (<p className='error'>Please enter the name</p>) : ""}
         <div className="form-field">
           <select
             className="select"
             type="text"
             autoComplete="off"
             name="level"
+            
           >
             <option className="option" value="">
               DIFFICULTY LEVEL
