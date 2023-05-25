@@ -19,6 +19,27 @@ p {
   background-color: var(--bkg-color, #1d3557);
   padding: 30px 40px 60px 40px;
 }
+
+.theme-switcher {
+  width: 15%;
+  font-size: 15px;
+  padding: 5px;
+  border-color: none;
+  border: none;
+  background-color: black;
+  color: #f1faee;
+  border-radius: 10px;
+  margin: 5px;
+  margin-bottom: 1rem;
+}
+.theme-switcher:focus {
+  outline: none;
+  transform: scale(1.1);
+}
+.theme-switcher:hover {
+  outline: none;
+  transform: scale(1.1);
+}
 .home-page-container {
   width: 100%;
   display: flex;
