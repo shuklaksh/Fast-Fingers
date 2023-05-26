@@ -2,9 +2,10 @@ import React from 'react'
 import PersonIcon from '@mui/icons-material/Person';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import KeyboardIcon from '@mui/icons-material/Keyboard';
+import Timer from './Timer';
 import "./Game.css"
 
-function Game() {
+function Game({user}) {
   return (
     <div className='game-page-container'>
 
@@ -23,11 +24,11 @@ function Game() {
           <div className="userInfo">
             <div className="card">
               <PersonIcon />
-              <div className="card-text">Lakshay</div>
+              <div className="card-text">{user.name}</div>
             </div>
             <div className="card">
               <VideogameAssetIcon />
-              <div className="card-text">easy</div>
+              <div className="card-text">{user.level}</div>
             </div>
           </div>
           <div className="userInfo">
@@ -39,10 +40,20 @@ function Game() {
               SCORE: 0:00
             </div>
           </div>
-          <div className="main-game">
-            
-          </div>
         </div>
+        <div className="main-game">
+          <Timer />  
+          <div className="game-word">
+          </div>
+          <div className="input-word">
+              <input
+                type="text"
+                autoComplete="off"
+                name="inputWord"
+              />
+            </div> 
+        </div>
+        
       </div>
     </div>
 

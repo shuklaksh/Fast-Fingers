@@ -58,7 +58,7 @@ function App() {
         </option>
       </select>
       {
-        isLoggedIn ? <GamePage /> : 
+        isLoggedIn ? <GamePage user={user}/> : 
         (
           <HomePage 
               changeUser={changeUser}
