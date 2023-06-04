@@ -1,7 +1,17 @@
 import React from 'react'
 import "./Timer.css"
 
-function Timer() {
+function Timer({time}) {
+
+    const makeTime = (time) => {
+        time = time.toFixed(2)+"";
+        let seconds = time.split(".")[0];
+        let miliSeconds = time.split(".")[1];
+        if (seconds < 10) {
+          seconds = `0${seconds}`;
+        }
+        return `${seconds}:${miliSeconds}`;
+      };
     return (
         <div className="countdown">
           <div className="base-timer">
@@ -31,7 +41,7 @@ function Timer() {
                 ></path>
               </g>
             </svg>
-            <span className="base-timer__label">ss</span>
+            <span className="base-timer__label">{makeTime(time)}</span>
           </div>
         </div>
   )

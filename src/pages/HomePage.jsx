@@ -1,10 +1,10 @@
 import Welcome from "../components/welcomePage/Welcome"
 
-function HomePage({setUser,changeUser,changeLoginState}) {
+function HomePage({user,changeUser,changeLoginState}) {
   return (
     <div className="home-page">
       <Welcome 
-        setUser={setUser}
+        user={user}
         changeUser={changeUser}
         changeLoginState={changeLoginState}
       />

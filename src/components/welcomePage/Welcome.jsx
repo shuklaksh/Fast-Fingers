@@ -5,9 +5,9 @@ import useSound from 'use-sound';
 import errorSound from '../../assets/audio/errorSound.wav';
 import './Welcome.css'
 
-function Welcome({changeUser, changeLoginState}) {
+function Welcome({user,changeUser, changeLoginState}) {
   const [name,setName] = useState('');
-  const [level,setLevel] = useState("");
+  const [level,setLevel] = useState(user.level);
   const[error] = useSound(errorSound);
   const[isNameError,setIsNameError] = useState(false)
   const[isLevelError,setIsLevelError] = useState(false);
