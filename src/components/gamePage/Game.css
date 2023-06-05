@@ -141,3 +141,15 @@
     transform: scale(1.1);
     transition: 0.2s;
   }  
+
+  .highScore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scores {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }

@@ -5,10 +5,11 @@ import KeyboardIcon from '@mui/icons-material/Keyboard';
 import Timer from './Timer';
 import "./Game.css"
 
-function Game({user,word,score,incrementScore,scoreArray,quitGame,isCorrect,changeWord}) {
+function Game({user,word,score,incrementScore,scoreArray,gameCount,quitGame,isCorrect,changeWord}) {
   const [inputWord, setInputWord] = useState("");
   const [time,setTime] = useState();
   const[timePassed,setTimePassed] = useState(0);
+  const [highScores,setHighScores] = useState(scoreArray)
 
   const handleInputChange = (e) => {
     setInputWord(e.target.value);
@@ -52,19 +53,21 @@ function Game({user,word,score,incrementScore,scoreArray,quitGame,isCorrect,chan
     
     
   }
-    
+  highScores.sort(function(a, b){return b-a});
 
   return (
     <div className='game-page-container'>
 
       <div className="left-bar">
         <div className="score-board">
-          <div className="score-heading">SCORE BOARD</div>
+          <div className="score-heading">HIGHEST SCORES</div>
+          <ul className="highScore">
           {
-            scoreArray && scoreArray.map((scoreVal) => {
-              return ( <div className="scores">{scoreVal}</div>)
+            highScores && highScores.map((scoreVal) => {
+              return ( <li className="scores">{scoreVal}</li>)
             })
           }
+          </ul>
          
         </div>
         <button className="stop-game" onClick={quitGame}>

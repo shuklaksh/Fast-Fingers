@@ -11,6 +11,7 @@ function GamePage({user}) {
   const [wordChangeAudio] = useSound(wordSound);
   const [score,setScore] = useState(0);
   const [scoreArray,setScoreArray] = useState([]);
+  const [gameCount,setGameCount] = useState(0);
  
 
   useEffect(() => {
@@ -18,8 +19,10 @@ function GamePage({user}) {
     setGame(true);
   },[])
 
+  
+
   const quitGame = () => {
-    setScoreArray([...scoreArray,score])
+    setScoreArray([...scoreArray,score]);
     setGame(false);
 
   }
@@ -49,6 +52,7 @@ function GamePage({user}) {
       user={user}
       word={gameWord}
       score={score}
+      gameCount={gameCount}
       incrementScore = {() => setScore(score+1)}
       scoreArray={scoreArray}
       quitGame = {quitGame}
