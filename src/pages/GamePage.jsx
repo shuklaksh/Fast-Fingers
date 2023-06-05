@@ -16,6 +16,16 @@ function GamePage({user}) {
   const quitGame = () => {
     setGame(false);
   }
+
+  const changeWord = () => {
+    // wordChangeAudio();
+    const newWord = GameWord(user.level);
+    setGameWord(newWord.toUpperCase());
+  };
+  const playAgain = () => {
+    setGame(true);
+    changeWord();
+  };
   
  
   return (
@@ -25,7 +35,7 @@ function GamePage({user}) {
       user={user}
       word={gameWord}
       quitGame = {quitGame}
-      /> ) : <EndGame user={user}/>
+      /> ) : <EndGame user={user} playAgain={() => playAgain()}/>
       }
       
     </div>

@@ -4,7 +4,7 @@ import KeyboardIcon from '@mui/icons-material/Keyboard';
 import ReplayIcon from '@mui/icons-material/Replay';
 import './EndGame.css'
 
-function EndGame({user,setGame}) {
+function EndGame({user,playAgain}) {
   return (
     <div className="endGame">
       <div className="game-header">
@@ -28,8 +28,8 @@ function EndGame({user,setGame}) {
       <div className="end-game">
         <div className="end-header">SCORE : GAME</div>
         <div className="score-card">score</div>
-        <button className="play-again" >
-          <div className="redo">
+        <button className="play-again" onClick={playAgain}>
+          <div className="redo" >
             <ReplayIcon />
           </div>
           <div className="redo-btn">PLAY AGAIN</div>

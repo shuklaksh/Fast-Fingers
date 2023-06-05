@@ -59,7 +59,7 @@ function Game({user,word,quitGame}) {
           <div className="score-heading">SCORE BOARD</div>
           <div className="scores">pastScores</div>
         </div>
-        <button className="stop-game" >
+        <button className="stop-game" onClick={quitGame}>
           <div className="stop-quitGame">STOP GAME</div>
         </button>
       </div>
