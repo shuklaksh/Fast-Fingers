@@ -1,15 +1,39 @@
 import React, { useState } from 'react'
 import keyboard from '../../assets/images/keyBoard.svg';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import useSound from 'use-sound';
+import errorSound from '../../assets/audio/errorSound.wav';
 import './Welcome.css'
 
-function Welcome({onSubmit}) {
-
-  const[name,setName] = useState("");
+function Welcome({user,changeUser, changeLoginState}) {
+  const [name,setName] = useState('');
+  const [level,setLevel] = useState(user.level);
+  const[error] = useSound(errorSound);
+  const[isNameError,setIsNameError] = useState(false)
+  const[isLevelError,setIsLevelError] = useState(false);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    onSubmit();
+    if(name ==='') {
+      error();
+      setIsNameError(true);
+    } else if(level === "") {
+      error();
+      setIsNameError(false);
+      setIsLevelError(true);
+    }
+     else {
+      const newUser = {
+        "name" : name,
+        "level": level
+      }
+      changeUser(newUser);
+
+      setIsNameError(false);
+      setIsLevelError(false);
+      changeLoginState();
+    }
+   
   }
 
   return (
@@ -33,12 +57,15 @@ function Welcome({onSubmit}) {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
+        {isNameError ? (<p className='error'>Please enter the name</p>) : ""}
         <div className="form-field">
           <select
             className="select"
             type="text"
             autoComplete="off"
             name="level"
+            value={level}
+            onChange={(e) => setLevel(e.target.value)}
           >
             <option className="option" value="">
               DIFFICULTY LEVEL
@@ -53,6 +80,7 @@ function Welcome({onSubmit}) {
               Hard
             </option>
           </select>
+          {isLevelError ? (<p className='error'>Please enter the Level</p>) : ""}
         </div>
         <button className="start-game" type="submit">
           <PlayArrowIcon />
