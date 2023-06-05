@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Timer.css"
 
-function Timer({time}) {
+function Timer({time,timePassed}) {
 
     const makeTime = (time) => {
         time = time.toFixed(2)+"";
@@ -12,6 +12,17 @@ function Timer({time}) {
         }
         return `${seconds}:${miliSeconds}`;
       };
+
+      const colorPath = (time, timePassed) => {
+        const path = (((time - timePassed) / time) * 283);
+        return `${path} 283`;
+      };
+
+      const pickColor = (time, timePassed) => {
+        if(time-timePassed < 1)return "#e63946";
+        return "var(--bkg-color, #1d3557)";
+      }
+
     return (
         <div className="countdown">
           <div className="base-timer">
@@ -29,7 +40,7 @@ function Timer({time}) {
                 />
                 <path
                   id="base-timer-path-remaining"
-                //   strokeDasharray={colorPath(time, timePassed.toFixed(2))}
+                  strokeDasharray={colorPath(time, timePassed.toFixed(2))}
                   className="base-timer__path-remaining"
                   d="
                     M 50, 50
@@ -37,7 +48,7 @@ function Timer({time}) {
                     a 45,45 0 1,0 90,0
                     a 45,45 0 1,0 -90,0
                   "
-                //   style= {{stroke:`${pickColor(time, timePassed)}`}}
+                  style= {{stroke:`${pickColor(time, timePassed)}`}}
                 ></path>
               </g>
             </svg>

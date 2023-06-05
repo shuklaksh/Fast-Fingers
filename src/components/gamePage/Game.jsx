@@ -5,25 +5,28 @@ import KeyboardIcon from '@mui/icons-material/Keyboard';
 import Timer from './Timer';
 import "./Game.css"
 
-function Game({user,word,quitGame}) {
+function Game({user,word,score,incrementScore,scoreArray,quitGame,isCorrect,changeWord}) {
   const [inputWord, setInputWord] = useState("");
-  const [time,setTime] = useState(3.99);
+  const [time,setTime] = useState();
   const[timePassed,setTimePassed] = useState(0);
 
   const handleInputChange = (e) => {
     setInputWord(e.target.value);
+   if(isCorrect(e.target.value)) {
+    changeWord();
+    incrementScore();
+    setInputWord('');
+   }
+      
   }
-
+  
   useEffect(() =>{
-    switch(user.level) {
-      case "Easy" :
-        setTime(3.99);
-      case "Medium" :
-        setTime(4.99);
-      case "Difficult" :
-        setTime(5.99);
-      default:
-        setTime(3.99);
+    if(user.level === 'Easy') {
+      setTime(3.99);
+    } else if (user.level === 'Medium') {
+      setTime(4.99);
+    } else {
+      setTime(5.99)
     }
   },[]);
 
@@ -57,7 +60,12 @@ function Game({user,word,quitGame}) {
       <div className="left-bar">
         <div className="score-board">
           <div className="score-heading">SCORE BOARD</div>
-          <div className="scores">pastScores</div>
+          {
+            scoreArray && scoreArray.map((scoreVal) => {
+              return ( <div className="scores">{scoreVal}</div>)
+            })
+          }
+         
         </div>
         <button className="stop-game" onClick={quitGame}>
           <div className="stop-quitGame">STOP GAME</div>
@@ -82,7 +90,7 @@ function Game({user,word,quitGame}) {
               <div className="card-text">fast fingers</div>
             </div>
             <div className="card" style={{ fontWeight: 600 }}>
-              SCORE: 0:00
+              SCORE: {score}
             </div>
           </div>
         </div>
@@ -90,6 +98,7 @@ function Game({user,word,quitGame}) {
           <Timer 
           word={word} 
           time={time - timePassed}
+          timePassed={timePassed}
 
           />  
           <div className="game-word">

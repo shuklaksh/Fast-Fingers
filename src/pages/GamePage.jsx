@@ -2,10 +2,15 @@ import {useState, useEffect} from 'react'
 import Game from '../components/gamePage/Game'
 import GameWord from '../data/GameWord';
 import EndGame from './EndGame';
+import wordSound from '../assets/audio/wordSound.wav';
+import useSound from 'use-sound';
 
 function GamePage({user}) {
   const [gameWord, setGameWord] = useState("");
   const [game,setGame] = useState(true);
+  const [wordChangeAudio] = useSound(wordSound);
+  const [score,setScore] = useState(0);
+  const [scoreArray,setScoreArray] = useState([]);
  
 
   useEffect(() => {
@@ -14,17 +19,26 @@ function GamePage({user}) {
   },[])
 
   const quitGame = () => {
+    setScoreArray([...scoreArray,score])
     setGame(false);
+
   }
 
   const changeWord = () => {
-    // wordChangeAudio();
+    wordChangeAudio();
     const newWord = GameWord(user.level);
     setGameWord(newWord.toUpperCase());
   };
   const playAgain = () => {
     setGame(true);
+    setScore(0);
     changeWord();
+  };
+
+  const isCorrect = (inputWord) => {
+    if (gameWord === inputWord.toUpperCase()) {
+     return true;
+    } return false;
   };
   
  
@@ -34,8 +48,14 @@ function GamePage({user}) {
       <Game 
       user={user}
       word={gameWord}
+      score={score}
+      incrementScore = {() => setScore(score+1)}
+      scoreArray={scoreArray}
       quitGame = {quitGame}
-      /> ) : <EndGame user={user} playAgain={() => playAgain()}/>
+      isCorrect = {isCorrect}
+      changeWord = {() => changeWord()
+      }
+      /> ) : <EndGame user={user}  score={score} playAgain={() => playAgain()}/>
       }
       
     </div>
