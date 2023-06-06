@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import PersonIcon from '@mui/icons-material/Person';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import KeyboardIcon from '@mui/icons-material/Keyboard';
@@ -48,11 +48,14 @@ function Game({user,word,score,incrementScore,scoreArray,gameCount,quitGame,isCo
   },[timePassed]);
 
   if ((time - timePassed) <= 0) {
-    console.log("hui")
     quitGame();
-    
-    
   }
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [word]);
+  
   highScores.sort(function(a, b){return b-a});
 
   return (
@@ -131,6 +134,7 @@ function Game({user,word,score,incrementScore,scoreArray,gameCount,quitGame,isCo
                 name="inputWord"
                 value={inputWord}
                 onChange={handleInputChange}
+                ref={inputRef}
               />
             </div> 
         </div>
